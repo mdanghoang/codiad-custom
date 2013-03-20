@@ -15,8 +15,8 @@ class Shell {
     // PROPERTIES
     //////////////////////////////////////////////////////////////////
 
-    public $cmd     = '';
-    public $args    = '';
+    public $cmd  = '';
+    public $args = '';
 
     //////////////////////////////////////////////////////////////////
     // METHODS
@@ -29,9 +29,9 @@ class Shell {
     //////////////////////////////////////////////////////////////////
 
     public function __construct() {
-        if (substr(php_uname(), 0, 7) == "Windows"){
+        if (substr(php_uname(), 0, 7) == "Windows") {
             $this->cmd = 'dir C:\\';
-        } else { 
+        } else {
             $this->cmd = 'ls -al';
         }
         
@@ -42,8 +42,7 @@ class Shell {
     //////////////////////////////////////////////////////////////////
 
     public function ExecCmd() {
-		exec($this->cmd,$output);
-		echo formatJSEND("success",$output);
+        exec($this->cmd,$output);
+        echo formatJSEND("success",$output);
     }
-
 }
