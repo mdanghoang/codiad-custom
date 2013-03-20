@@ -20,8 +20,8 @@
     //////////////////////////////////////////////////////////////////
 
     if($_GET['action']=='test_command') {
-	    $Shell->cmd = "dir D:\\";
-	    $Shell->ExecCmd();
+        $Shell->cmd = "dir D:\\";
+        $Shell->ExecCmd();
     }
 
     //////////////////////////////////////////////////////////////////
@@ -29,7 +29,7 @@
     //////////////////////////////////////////////////////////////////
 
     if($_GET['action']=='deploy_app') {
-	    echo formatJSEND("success",$_SESSION['user'].' - '.$_SESSION['project']);
+        echo formatJSEND("success",$_SESSION['user'].' - '.$_SESSION['project']);
     }
 
     //////////////////////////////////////////////////////////////////
@@ -37,8 +37,8 @@
     //////////////////////////////////////////////////////////////////
 
     if($_GET['action']=='finish_exam') {
-	    $Shell->cmd = "D:\\Projects\\Training\\Codiad\\codiad\\components\\shell_script\\script\\testmail.bat";
-	    $Shell->ExecCmd();
+        $Shell->cmd = "D:\\Projects\\Training\\Codiad\\codiad\\components\\shell_script\\script\\testmail.bat";
+        $Shell->ExecCmd();
     }
 
 
