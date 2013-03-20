@@ -4,6 +4,9 @@
 *  Copyright (c) Codiad & Kent Safranski (codiad.com), distributed
 *  as-is and without warranty under the MIT License. See
 *  [root]/license.txt for more. This information must remain intact.
+*
+*
+*  This class is used for executing command line
 */
 
 class Shell {
@@ -26,21 +29,19 @@ class Shell {
     //////////////////////////////////////////////////////////////////
 
     public function __construct() {
-	    //$cmd = 'ls -al';
-        $this->cmd = 'dir C:\\';
+        if (substr(php_uname(), 0, 7) == "Windows"){
+            $this->cmd = 'dir C:\\';
+        } else { 
+            $this->cmd = 'ls -al';
+        }
+        
     }
 
     //////////////////////////////////////////////////////////////////
-    // Authenticate
+    // Execute command
     //////////////////////////////////////////////////////////////////
 
     public function ExecCmd() {
-	    //$output = "Win command";
-        //if (substr(php_uname(), 0, 7) == "Windows"){
-        //    pclose(popen($this->cmd, "r"));
-        //} else { 
-        //    $output = exec($this->cmd);
-        //}
 		exec($this->cmd,$output);
 		echo formatJSEND("success",$output);
     }
