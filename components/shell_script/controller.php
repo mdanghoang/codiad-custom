@@ -4,10 +4,10 @@
     *  Copyright (c) Codiad & Kent Safranski (codiad.com), distributed
     *  as-is and without warranty under the MIT License. See
     *  [root]/license.txt for more. This information must remain intact.
-	*
-	*
-	*  This controller is used for commit code to git, analyze code,
-	*  deploy application
+    *
+    *
+    *  This controller is used for commit code to git, analyze code,
+    *  deploy application
     */
 
     require_once('../../config.php');

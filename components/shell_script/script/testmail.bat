@@ -4,10 +4,10 @@
 @rem **
 @rem ** testmail.bat
 @rem **
-@rem ** This script is used to report daily meeting everyday:
+@rem ** This script is used to test execute command in Windows
 @rem ** sendmail with report attached.
 @rem **
-@rem ** Usage: dailyreport
+@rem ** Usage: testmail
 @rem **
 @rem ***************************************************************
 
