@@ -8,6 +8,8 @@
 
     codiad.shellScript = {
         controller: 'components/shell_script/controller.php',
+        dialog: 'components/shell_script/dialog.php',
+        
 		
         //////////////////////////////////////////////////////////////////
         // Analyze source code
@@ -55,6 +57,28 @@
                 } else {
 				    codiad.message.error('ERROR');
 				}
+            });
+        },
+		
+        //////////////////////////////////////////////////////////////////
+        // Commit active file
+        //////////////////////////////////////////////////////////////////
+
+        commit: function() {
+            var _this = this;
+            codiad.modal.load(600, this.dialog + '?action=commit');
+            $('#modal-content form')
+                .live('submit', function(e) {
+                e.preventDefault();
+                $.get(_this.controller + '?action=commit', function(data) {
+                    var commitResponse = codiad.jsend.parse(data);
+                    commitResponse = commitResponse.join('\n');
+                    if (commitResponse !== 'error') {
+                        alert(commitResponse);
+                    } else {
+				        codiad.message.error('ERROR');
+                    }
+                });
             });
         },
 		

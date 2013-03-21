@@ -12,8 +12,9 @@
 
     require_once('../../config.php');
     require_once('class.shell.php');
+    require_once('../active/class.active.php');
 	
-	$Shell = new Shell();
+    $Shell = new Shell();
 
     //////////////////////////////////////////////////////////////////
     // Test call command line from GUI in Codiad
@@ -41,5 +42,14 @@
         $Shell->ExecCmd();
     }
 
+    //////////////////////////////////////////////////////////////////
+    // Commit a file or some files
+    //////////////////////////////////////////////////////////////////
 
+    if($_GET['action']=='commit') {
+        //echo formatJSEND("success","test action commit");
+        $Active = new Active();
+        $Active->username = $_SESSION('user');
+        $Active->ListActive();
+    }
 ?>

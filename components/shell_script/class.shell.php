@@ -42,6 +42,7 @@ class Shell {
     //////////////////////////////////////////////////////////////////
 
     public function ExecCmd() {
+        $output = null;
         exec($this->cmd,$output);
         echo formatJSEND("success",$output);
     }

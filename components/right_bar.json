@@ -70,6 +70,11 @@
         "onclick": "codiad.shellScript.deployApp();"
     },
     {
+        "title": "Commit code",
+        "icon": "icon-install",
+        "onclick": "codiad.shellScript.commit();"
+    },
+    {
         "title": "Finish exam",
         "icon": "icon-install",
         "onclick": "codiad.shellScript.finishExam();"
