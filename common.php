@@ -136,4 +136,24 @@
         return true;
     }
 
+    define("GIT_STATUS_MODIFIED","modified");
+    define("GIT_STATUS_UNTRACKED","untracked");
+
+    function gitStatus($status) {
+        $ret = "Unknown";
+        switch ($status) {
+            case GIT_STATUS_MODIFIED:
+                $ret = "Modified";
+                break;
+
+            case GIT_STATUS_UNTRACKED:
+                $ret = "Untracked";
+                break;
+
+            default:
+                break;
+        }
+        return $ret;
+    }
+
 ?>
