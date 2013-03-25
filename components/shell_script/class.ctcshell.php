@@ -66,11 +66,6 @@ class CTCShell extends Shell {
         }
     }
     
-    public function checkTest() {
-        $this->cmd = "cd " . WORKSPACE . "/" . $this->project . " && git ls-files --modified --exclude-standard";
-        echo formatJSEND("success", $this->cmd);
-    }
-        
     //////////////////////////////////////////////////////////////////
     // Commit files
     //////////////////////////////////////////////////////////////////
@@ -81,6 +76,7 @@ class CTCShell extends Shell {
         $files_to_add = "";
         $file_to_commit = "";
         foreach ($modif_files as $data) {
+            $data = (array)$data;
             if ($data['status'] == GIT_STATUS_UNTRACKED) {
                 $files_to_add = $files_to_add . $data['path'] . " ";
             }
@@ -88,7 +84,9 @@ class CTCShell extends Shell {
         }
         
         // Add new files
-        $this->cmd = $this->cmd . " && git add " . $files_to_add;
+        if (!empty($files_to_add)) {
+            $this->cmd = $this->cmd . " && git add " . $files_to_add;
+        }
         
         // Commit files to local repository
         $msg = "";

@@ -69,12 +69,12 @@
                 e.preventDefault();
                 var selectedFiles = $('#txt_selected_files').val();
                 var commitMessage = $.trim($('textarea[name=commit_message]').val());
-                alert(selectedFiles + " - " + commitMessage);
+                //alert(selectedFiles + " - " + commitMessage);
                 $.get(_this.controller + '?action=commit&list=' + selectedFiles + '&message=' + commitMessage, function(data) {
                     var commitResponse = codiad.jsend.parse(data);
                     //commitResponse = commitResponse.join('\n');
                     if (commitResponse !== 'error') {
-                        alert(commitResponse);
+                        alert(commitResponse.toString());
                     } else {
                         codiad.message.error('ERROR');
                     }
