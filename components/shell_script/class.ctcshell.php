@@ -49,6 +49,7 @@ class CTCShell extends Shell {
         }
         
         // Get untracked files
+        $output = false;
         $this->cmd = "cd " . WORKSPACE . "/" . $this->project . " && git ls-files --other --exclude-standard";
         $this->execCmdWithOutput($output);
         if ($output != false) {
