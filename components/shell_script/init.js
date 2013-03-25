@@ -63,7 +63,7 @@
 
         commit: function() {
             var _this = this;
-            $.get(_this.controller+'?action=check_commit');
+            $.get(this.controller+'?action=check_commit');
             codiad.modal.load(600, this.dialog + '?action=load');
             $('#modal-content form').live('submit', function(e) {
                 e.preventDefault();

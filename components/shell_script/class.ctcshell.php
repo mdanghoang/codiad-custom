@@ -58,11 +58,16 @@ class CTCShell extends Shell {
         }
         
         if ($modified_files != false) {
-            saveJSON($diff_file_name, $modified_files);
-            formatJSEND("success", $modified_files);
+            saveJSON(basename($diff_file_name), $modified_files);
+            echo formatJSEND("success", $modified_files);
         } else {
-            formatJSEND("error");
+            echo formatJSEND("error", $this->cmd);
         }
+    }
+    
+    public function checkTest() {
+        $this->cmd = "cd " . WORKSPACE . "/" . $this->project . " && git ls-files --modified --exclude-standard";
+        echo formatJSEND("success", $this->cmd);
     }
         
     //////////////////////////////////////////////////////////////////
