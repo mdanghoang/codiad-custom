@@ -38,12 +38,20 @@ class Shell {
     }
 
     //////////////////////////////////////////////////////////////////
+    // Execute command with output
+    //////////////////////////////////////////////////////////////////
+
+    public function execCmdWithOutput(&$output) {
+        exec($this->cmd,$output);
+    }
+
+    //////////////////////////////////////////////////////////////////
     // Execute command
     //////////////////////////////////////////////////////////////////
 
-    public function ExecCmd() {
-        $output = null;
-        exec($this->cmd,$output);
+    public function execCmd() {
+        $output = false;
+        $this->execCmdWithOutput($output);
         echo formatJSEND("success",$output);
     }
 }

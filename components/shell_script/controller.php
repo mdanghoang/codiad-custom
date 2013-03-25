@@ -11,10 +11,9 @@
     */
 
     require_once('../../config.php');
-    require_once('class.shell.php');
-    require_once('../active/class.active.php');
+    require_once('class.ctcshell.php');
 	
-    $Shell = new Shell();
+    $Shell = new CTCShell($_SESSION['user'],$_SESSION['project']);
 
     //////////////////////////////////////////////////////////////////
     // Test call command line from GUI in Codiad
@@ -22,7 +21,7 @@
 
     if($_GET['action']=='test_command') {
         $Shell->cmd = "dir D:\\";
-        $Shell->ExecCmd();
+        $Shell->execCmd();
     }
 
     //////////////////////////////////////////////////////////////////
@@ -39,7 +38,15 @@
 
     if($_GET['action']=='finish_exam') {
         $Shell->cmd = "D:\\Projects\\Training\\Codiad\\codiad\\components\\shell_script\\script\\testmail.bat";
-        $Shell->ExecCmd();
+        $Shell->execCmd();
+    }
+
+    //////////////////////////////////////////////////////////////////
+    // Check if there are files to commit
+    //////////////////////////////////////////////////////////////////
+
+    if($_GET['action']=='check_commit') {
+        $Shell->checkModifiedFiles();
     }
 
     //////////////////////////////////////////////////////////////////
@@ -47,9 +54,6 @@
     //////////////////////////////////////////////////////////////////
 
     if($_GET['action']=='commit') {
-        //echo formatJSEND("success","test action commit");
-        $Active = new Active();
-        $Active->username = $_SESSION('user');
-        $Active->ListActive();
+        $Shell->commit($_GET['list'], $_GET['message']);
     }
 ?>
