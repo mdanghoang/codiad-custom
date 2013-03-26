@@ -1,6 +1,0 @@
-# This is shell script to deploy an php application
-#
-# Usage: deploy_app_php [param1] [param1] ...
-# param1: ...
-
-echo "Deploy application with success"
