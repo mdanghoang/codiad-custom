@@ -25,13 +25,35 @@
     }
 
     //////////////////////////////////////////////////////////////////
-    // Test show user and project
+    // Deploy application
+    // At this moment, function is used only for deploying php application
+    // TODO deploy java application
     //////////////////////////////////////////////////////////////////
 
     if($_GET['action']=='deploy_app') {
         logCTC("Action DEPLOY App ============ Start");
-        echo formatJSEND("success",$_SESSION['user'].' - '.$_SESSION['project']);
+        $out = $Shell->deployApplication();
+        if ($out != false) {
+            echo formatJSEND("success","Deployed successfully");
+        } else {
+            echo formatJSEND("error","Deploy application failed");
+        }
         logCTC("Action DEPLOY App ============ End");
+    }
+
+    //////////////////////////////////////////////////////////////////
+    // Analyze code
+    //////////////////////////////////////////////////////////////////
+
+    if($_GET['action']=='analyze_code') {
+        logCTC("Action ANALYZE Code ============ Start");
+        $out = $Shell->analyzeCode();
+        if ($out != false) {
+            echo formatJSEND("success","Analyzed code successfully");
+        } else {
+            echo formatJSEND("error","Analyze code failed");
+        }
+        logCTC("Action ANALYZE Code ============ End");
     }
 
     //////////////////////////////////////////////////////////////////
@@ -61,7 +83,12 @@
 
     if($_GET['action']=='commit') {
         logCTC("Action COMMIT ============ Start");
-        $Shell->commit($_GET['list'], $_GET['message']);
+        $out = $Shell->commit($_GET['list'], $_GET['message']);
+        if ($out != false) {
+            echo formatJSEND("success","Commited successfully");
+        } else {
+            echo formatJSEND("error","Commit failed");
+        }
         logCTC("Action COMMIT ============ End");
     }
 ?>

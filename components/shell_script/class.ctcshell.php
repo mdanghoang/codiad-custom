@@ -8,6 +8,8 @@
 
 require_once('class.shell.php');
 
+define("SCRIPT_PATH", BASE_PATH . "/shell_script/script");
+
 class CTCShell extends Shell {
     
     public $user = '';
@@ -41,9 +43,7 @@ class CTCShell extends Shell {
         
         // Get modified files
         $this->cmd = "cd " . WORKSPACE . "/" . $this->project . " ; git ls-files --modified --exclude-standard";
-        logCTC($this->cmd);
         $this->execCmdWithOutput($output);
-        logCTC(implode('\n',$output));
         if ($output != false) {
             foreach ($output as $line) {
                 $modified_files[] = array("name"=>basename($line),"path"=>$line,"status"=>GIT_STATUS_MODIFIED);
@@ -53,9 +53,7 @@ class CTCShell extends Shell {
         // Get untracked files
         $output = false;
         $this->cmd = "cd " . WORKSPACE . "/" . $this->project . " ; git ls-files --other --exclude-standard";
-        logCTC($this->cmd);
         $this->execCmdWithOutput($output);
-        logCTC(implode('\n',$output));
         if ($output != false) {
             foreach ($output as $line) {
                 $modified_files[] = array("name"=>basename($line),"path"=>$line,"status"=>GIT_STATUS_UNTRACKED);
@@ -65,9 +63,7 @@ class CTCShell extends Shell {
         // Get deleted files
         $output = false;
         $this->cmd = "cd " . WORKSPACE . "/" . $this->project . " ; git ls-files --deleted --exclude-standard";
-        logCTC($this->cmd);
         $this->execCmdWithOutput($output);
-        logCTC(implode('\n',$output));
         if ($output != false) {
             foreach ($output as $line) {
                 $modified_files[] = array("name"=>basename($line),"path"=>$line,"status"=>GIT_STATUS_DELETED);
@@ -76,10 +72,9 @@ class CTCShell extends Shell {
         
         if ($modified_files != false) {
             saveJSON(basename($diff_file_name), $modified_files);
-            echo formatJSEND("success", $modified_files);
-        } else {
-            echo formatJSEND("error", $this->cmd);
         }
+        
+        return $modified_files;
     }
     
     //////////////////////////////////////////////////////////////////
@@ -123,11 +118,9 @@ class CTCShell extends Shell {
         // Push files to remote repository
         $output = false;
         $this->cmd = $this->cmd . " ; git push";
-        logCTC($this->cmd);
         $this->execCmdWithOutput($output);
-        logCTC(implode(PHP_EOL,$output));
         
-        echo formatJSEND("success", $this->cmd);
+        return $output;
     }
         
     //////////////////////////////////////////////////////////////////
@@ -135,7 +128,11 @@ class CTCShell extends Shell {
     //////////////////////////////////////////////////////////////////
 
     public function deployApplication() {
-        echo formatJSEND("success", get_class($this) . " - deployApplication");
+        $this->cmd = SCRIPT_PATH . "/deploy_app_php " . $this->project;
+        $output = false;
+        $this->execCmdWithOutput($output);
+        
+        return $output;
     }
         
     //////////////////////////////////////////////////////////////////
@@ -143,7 +140,7 @@ class CTCShell extends Shell {
     //////////////////////////////////////////////////////////////////
 
     public function analyzeCode() {
-        echo formatJSEND("success", get_class($this) . " - analyzeCode");
+        return true;
     }
         
 }

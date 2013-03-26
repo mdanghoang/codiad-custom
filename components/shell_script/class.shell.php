@@ -42,6 +42,7 @@ class Shell {
     //////////////////////////////////////////////////////////////////
 
     public function execCmdWithOutput(&$output) {
+        logCTC("Running command: " . $this->cmd);
         //exec
         if(function_exists('exec')){
             exec($this->cmd, $output);
@@ -62,6 +63,10 @@ class Shell {
         else if(function_exists('shell_exec')){
             shell_exec($this->cmd);
         }
+        
+        if (!is_null($output) && !empty($output)) {
+            logCTC(\implode(PHP_EOL,$output));
+        }
     }
 
     //////////////////////////////////////////////////////////////////
@@ -71,6 +76,6 @@ class Shell {
     public function execCmd() {
         $output = false;
         $this->execCmdWithOutput($output);
-        echo formatJSEND("success",$output);
+        return $output;
     }
 }
