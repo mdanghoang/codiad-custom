@@ -74,7 +74,7 @@
                     var commitResponse = codiad.jsend.parse(data);
                     //commitResponse = commitResponse.join('\n');
                     if (commitResponse !== 'error') {
-                        alert(commitResponse.toString());
+                        alert(commitResponse);
                     } else {
                         codiad.message.error('ERROR');
                     }
