@@ -138,6 +138,7 @@
 
     define("GIT_STATUS_MODIFIED","modified");
     define("GIT_STATUS_UNTRACKED","untracked");
+    define("GIT_STATUS_DELETED","deleted");
 
     function gitStatus($status) {
         $ret = "Unknown";
@@ -148,6 +149,10 @@
 
             case GIT_STATUS_UNTRACKED:
                 $ret = "Untracked";
+                break;
+
+            case GIT_STATUS_DELETED:
+                $ret = "Deleted";
                 break;
 
             default:

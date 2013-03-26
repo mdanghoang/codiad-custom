@@ -58,6 +58,16 @@ class CTCShell extends Shell {
             }
         }
         
+        // Get deleted files
+        $output = false;
+        $this->cmd = "cd " . WORKSPACE . "/" . $this->project . " ; git ls-files --deleted --exclude-standard";
+        $this->execCmdWithOutput($output);
+        if ($output != false) {
+            foreach ($output as $line) {
+                $modified_files[] = array("name"=>basename($line),"path"=>$line,"status"=>GIT_STATUS_DELETED);
+            }
+        }
+        
         if ($modified_files != false) {
             saveJSON(basename($diff_file_name), $modified_files);
             echo formatJSEND("success", $modified_files);
@@ -74,11 +84,15 @@ class CTCShell extends Shell {
         $this->cmd = "cd " . WORKSPACE . "/" . $this->project;
         $modif_files = json_decode($files_json);
         $files_to_add = "";
+        $files_to_delete = "";
         $file_to_commit = "";
         foreach ($modif_files as $data) {
             $data = (array)$data;
             if ($data['status'] == GIT_STATUS_UNTRACKED) {
                 $files_to_add = $files_to_add . $data['path'] . " ";
+            }
+            if ($data['status'] == GIT_STATUS_DELETED) {
+                $files_to_delete = $files_to_delete . $data['path'] . " ";
             }
             $file_to_commit = $file_to_commit . $data['path'] . " ";
         }
@@ -86,6 +100,11 @@ class CTCShell extends Shell {
         // Add new files
         if (!empty($files_to_add)) {
             $this->cmd = $this->cmd . " ; git add " . $files_to_add;
+        }
+        
+        // Update deleted files
+        if (!empty($files_to_delete)) {
+            $this->cmd = $this->cmd . " ; git add -u " . $files_to_add;
         }
         
         // Commit files to local repository
