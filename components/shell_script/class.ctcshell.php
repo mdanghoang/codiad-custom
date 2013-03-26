@@ -40,7 +40,7 @@ class CTCShell extends Shell {
         }
         
         // Get modified files
-        $this->cmd = "cd " . WORKSPACE . "/" . $this->project . " && git ls-files --modified --exclude-standard";
+        $this->cmd = "cd " . WORKSPACE . "/" . $this->project . " ; git ls-files --modified --exclude-standard";
         $this->execCmdWithOutput($output);
         if ($output != false) {
             foreach ($output as $line) {
@@ -50,7 +50,7 @@ class CTCShell extends Shell {
         
         // Get untracked files
         $output = false;
-        $this->cmd = "cd " . WORKSPACE . "/" . $this->project . " && git ls-files --other --exclude-standard";
+        $this->cmd = "cd " . WORKSPACE . "/" . $this->project . " ; git ls-files --other --exclude-standard";
         $this->execCmdWithOutput($output);
         if ($output != false) {
             foreach ($output as $line) {
@@ -85,7 +85,7 @@ class CTCShell extends Shell {
         
         // Add new files
         if (!empty($files_to_add)) {
-            $this->cmd = $this->cmd . " && git add " . $files_to_add;
+            $this->cmd = $this->cmd . " ; git add " . $files_to_add;
         }
         
         // Commit files to local repository
@@ -93,10 +93,10 @@ class CTCShell extends Shell {
         if (!is_null($message) && !empty($message)) {
             $msg = "-m \"" . $message . "\"";
         }
-        $this->cmd = $this->cmd . " && git commit " . $msg . " -- " . $file_to_commit;
+        $this->cmd = $this->cmd . " ; git commit " . $msg . " -- " . $file_to_commit;
         
         // Push files to remote repository
-        $this->cmd = $this->cmd . " && git push";
+        $this->cmd = $this->cmd . " ; git push";
         $output = false;
         $this->execCmdWithOutput($output);
         debug(json_encode($output));
