@@ -28,12 +28,11 @@
             alert('Deploy application in progress. You will receivce deployment result by mail.');
             // Run controller to deploy application
             $.get(this.controller + '?action=deploy_app', function(data) {
-                var testResponse = codiad.jsend.parse(data);
-                if (testResponse !== 'error') {
-                    alert(testResponse.toString());
-                    codiad.message.success(testResponse.toString());
+                var deployReponse = codiad.jsend.parse(data);
+                if (deployReponse !== 'error') {
+                    codiad.message.success(deployReponse);
                 } else {
-                    codiad.message.error('ERROR');
+                    codiad.message.error(deployReponse);
                 }
             });
         },
@@ -72,9 +71,9 @@
                 $.get(_this.controller + '?action=commit&list=' + selectedFiles + '&message=' + commitMessage, function(data) {
                     var commitResponse = codiad.jsend.parse(data);
                     if (commitResponse !== 'error') {
-                        codiad.message.success('Commited successfully');
+                        codiad.message.success(commitResponse);
                     } else {
-                        codiad.message.error('ERROR Commit failed !!!');
+                        codiad.message.error(commitResponse);
                     }
                 });
                 codiad.modal.unload();
