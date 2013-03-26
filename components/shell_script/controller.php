@@ -29,7 +29,9 @@
     //////////////////////////////////////////////////////////////////
 
     if($_GET['action']=='deploy_app') {
+        logCTC("Action DEPLOY App ============ Start");
         echo formatJSEND("success",$_SESSION['user'].' - '.$_SESSION['project']);
+        logCTC("Action DEPLOY App ============ End");
     }
 
     //////////////////////////////////////////////////////////////////
@@ -37,8 +39,10 @@
     //////////////////////////////////////////////////////////////////
 
     if($_GET['action']=='finish_exam') {
+        logCTC("Action FINISH Exam ============ Start");
         $Shell->cmd = "D:\\Projects\\Training\\Codiad\\codiad\\components\\shell_script\\script\\testmail.bat";
         $Shell->execCmd();
+        logCTC("Action FINISH Exam ============ End");
     }
 
     //////////////////////////////////////////////////////////////////
@@ -46,7 +50,9 @@
     //////////////////////////////////////////////////////////////////
 
     if($_GET['action']=='check_commit') {
+        logCTC("Action CHECK files to commit ============ Start");
         $Shell->checkModifiedFiles();
+        logCTC("Action CHECK files to commit ============ End");
     }
 
     //////////////////////////////////////////////////////////////////
@@ -54,6 +60,8 @@
     //////////////////////////////////////////////////////////////////
 
     if($_GET['action']=='commit') {
+        logCTC("Action COMMIT ============ Start");
         $Shell->commit($_GET['list'], $_GET['message']);
+        logCTC("Action COMMIT ============ End");
     }
 ?>

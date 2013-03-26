@@ -125,7 +125,7 @@ class CTCShell extends Shell {
         $this->cmd = $this->cmd . " ; git push";
         logCTC($this->cmd);
         $this->execCmdWithOutput($output);
-        logCTC(implode('\n',$output));
+        logCTC(implode(PHP_EOL,$output));
         
         echo formatJSEND("success", $this->cmd);
     }
