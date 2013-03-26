@@ -14,7 +14,7 @@ chown -R www-data:www-data /var/www/$name
 
 cd /tmp
 
-python /home/Workspace/codiad/src/deploy.py $name
+python /home/Workspace/codiad/src/deploy.py $user $name
 PID=`echo $?`
 if [ $PID != 0  ]
 then
