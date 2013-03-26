@@ -7,3 +7,12 @@ git clone $git_server:$user/$project_name.git /var/www/$name
 chown -R www-data:www-data /var/www/$name
 
 python /home/Workspace/codiad/src/deploy.py $name
+PID=`echo $?`
+if [ $PID != 0  ]
+then
+if
+	echo "........FAILED .........."
+else
+	echo "........DONE .........."
+fi
+
