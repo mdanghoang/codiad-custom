@@ -104,7 +104,7 @@ class CTCShell extends Shell {
         
         // Update deleted files
         if (!empty($files_to_delete)) {
-            $this->cmd = $this->cmd . " ; git add -u " . $files_to_add;
+            $this->cmd = $this->cmd . " ; git add -u " . $files_to_delete;
         }
         
         // Commit files to local repository
