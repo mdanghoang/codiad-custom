@@ -8,7 +8,7 @@
 
 require_once('class.shell.php');
 
-define("SCRIPT_PATH", BASE_PATH . "/shell_script/script");
+define("SCRIPT_PATH", BASE_PATH . "/components/shell_script/script");
 
 class CTCShell extends Shell {
     
