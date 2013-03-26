@@ -55,24 +55,19 @@
         "onclick": null
     },
     {
-        "title": "Test command",
-        "icon": "icon-flashlight",
-        "onclick": "codiad.shellScript.test();"
+        "title": "Commit code",
+        "icon": "icon-install",
+        "onclick": "codiad.shellScript.commit();"
     },
     {
         "title": "Analyze code",
         "icon": "icon-doc-text",
-        "onclick": "alert('Source code is being analyzed. You will receivce analysis result by mail.');"
+        "onclick": "codiad.shellScript.analyzeCode();"
     },
     {
         "title": "Deploy app",
         "icon": "icon-doc-text",
         "onclick": "codiad.shellScript.deployApp();"
-    },
-    {
-        "title": "Commit code",
-        "icon": "icon-install",
-        "onclick": "codiad.shellScript.commit();"
     },
     {
         "title": "Finish exam",
