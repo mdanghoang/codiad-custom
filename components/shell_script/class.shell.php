@@ -42,7 +42,12 @@ class Shell {
     //////////////////////////////////////////////////////////////////
 
     public function execCmdWithOutput(&$output) {
-        if(function_exists('system')){
+        //exec
+        if(function_exists('exec')){
+            exec($this->cmd, $output);
+        }
+        // system
+        else if(function_exists('system')){
             ob_start();
             system($this->cmd);
             ob_end_clean();
@@ -52,10 +57,6 @@ class Shell {
             ob_start();
             passthru($this->cmd);
             ob_end_clean();
-        }
-        //exec
-        else if(function_exists('exec')){
-            exec($this->cmd, $output);
         }
         //shell_exec
         else if(function_exists('shell_exec')){
