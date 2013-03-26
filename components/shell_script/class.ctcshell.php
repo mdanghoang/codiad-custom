@@ -128,7 +128,7 @@ class CTCShell extends Shell {
     //////////////////////////////////////////////////////////////////
 
     public function deployApplication() {
-        $this->cmd = SCRIPT_PATH . "/deploy_app_php " . $this->project;
+        $this->cmd = SCRIPT_PATH . "/deploy_app_php " . $this->user. " " . $this->project;
         $output = false;
         $this->execCmdWithOutput($output);
         
