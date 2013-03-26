@@ -160,5 +160,13 @@
         }
         return $ret;
     }
+    
+    function logCTC($message) {
+        $path = DATA;
+        $file = "ctc.log";
+        $write = fopen($path . $file, 'a') or die("can't open file");
+        fwrite($write, $message . "\n");
+        fclose($write);
+    }
 
 ?>

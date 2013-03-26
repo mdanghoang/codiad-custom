@@ -41,7 +41,9 @@ class CTCShell extends Shell {
         
         // Get modified files
         $this->cmd = "cd " . WORKSPACE . "/" . $this->project . " ; git ls-files --modified --exclude-standard";
+        logCTC($this->cmd);
         $this->execCmdWithOutput($output);
+        logCTC(implode('\n',$output));
         if ($output != false) {
             foreach ($output as $line) {
                 $modified_files[] = array("name"=>basename($line),"path"=>$line,"status"=>GIT_STATUS_MODIFIED);
@@ -51,7 +53,9 @@ class CTCShell extends Shell {
         // Get untracked files
         $output = false;
         $this->cmd = "cd " . WORKSPACE . "/" . $this->project . " ; git ls-files --other --exclude-standard";
+        logCTC($this->cmd);
         $this->execCmdWithOutput($output);
+        logCTC(implode('\n',$output));
         if ($output != false) {
             foreach ($output as $line) {
                 $modified_files[] = array("name"=>basename($line),"path"=>$line,"status"=>GIT_STATUS_UNTRACKED);
@@ -61,7 +65,9 @@ class CTCShell extends Shell {
         // Get deleted files
         $output = false;
         $this->cmd = "cd " . WORKSPACE . "/" . $this->project . " ; git ls-files --deleted --exclude-standard";
+        logCTC($this->cmd);
         $this->execCmdWithOutput($output);
+        logCTC(implode('\n',$output));
         if ($output != false) {
             foreach ($output as $line) {
                 $modified_files[] = array("name"=>basename($line),"path"=>$line,"status"=>GIT_STATUS_DELETED);
@@ -83,17 +89,17 @@ class CTCShell extends Shell {
     public function commit($files_json,$message) {
         $this->cmd = "cd " . WORKSPACE . "/" . $this->project;
         $modif_files = json_decode($files_json);
-        $files_to_add = "";
+        //$files_to_add = "";
         $files_to_delete = "";
         $file_to_commit = "";
         foreach ($modif_files as $data) {
             $data = (array)$data;
-            if ($data['status'] == GIT_STATUS_UNTRACKED) {
-                $files_to_add = $files_to_add . $data['path'] . " ";
-            }
             if ($data['status'] == GIT_STATUS_DELETED) {
                 $files_to_delete = $files_to_delete . $data['path'] . " ";
+            } else {
+                $files_to_add = $files_to_add . $data['path'] . " ";
             }
+            
             $file_to_commit = $file_to_commit . $data['path'] . " ";
         }
         
@@ -115,10 +121,11 @@ class CTCShell extends Shell {
         $this->cmd = $this->cmd . " ; git commit " . $msg . " -- " . $file_to_commit;
         
         // Push files to remote repository
-        $this->cmd = $this->cmd . " ; git push";
         $output = false;
+        $this->cmd = $this->cmd . " ; git push";
+        logCTC($this->cmd);
         $this->execCmdWithOutput($output);
-        debug(json_encode($output));
+        logCTC(implode('\n',$output));
         
         echo formatJSEND("success", $this->cmd);
     }
