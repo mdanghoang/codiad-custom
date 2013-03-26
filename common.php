@@ -165,7 +165,8 @@
         $path = DATA . "/";
         $file = "ctc.log";
         $write = fopen($path . $file, 'a') or die("can't open file");
-        fwrite($write, $message . "\n");
+        $preline = "[" . date("Y-m-d H:i:s") . "] ===> ";
+        fwrite($write, $preline . $message . PHP_EOL);
         fclose($write);
     }
 
