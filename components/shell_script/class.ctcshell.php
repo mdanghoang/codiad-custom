@@ -99,6 +99,7 @@ class CTCShell extends Shell {
         $this->cmd = $this->cmd . " && git push";
         $output = false;
         $this->execCmdWithOutput($output);
+        debug(json_encode($output));
         
         echo formatJSEND("success", $this->cmd);
     }
