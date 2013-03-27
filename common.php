@@ -137,7 +137,7 @@
     }
 
     define("GIT_STATUS_MODIFIED","modified");
-    define("GIT_STATUS_UNTRACKED","untracked");
+    define("GIT_STATUS_UNTRACKED","other");
     define("GIT_STATUS_DELETED","deleted");
 
     function gitStatus($status) {
@@ -161,6 +161,28 @@
         return $ret;
     }
     
+    define("GIT_FOLDER",".git");
+    function isGitFolder($path) {
+        return (basename($path) == GIT_FOLDER);
+    }
+    
+    //////////////////////////////////////////////////////////////////
+    // Check if a key/value exist in a 2 dimensions array
+    // Return: 
+    //     false if not exist
+    //     true if exist
+    //////////////////////////////////////////////////////////////////
+    function isInArray($key,$val,$array) {
+        $ret = false;
+        foreach ($array as $item) {
+            if (isset($item[$key]) && $item[$key] == $val) {
+                $ret = true;
+                break;
+            }
+        }
+        return $ret;
+    }
+
     function logCTC($message) {
         $path = DATA . "/";
         $file = "ctc.log";

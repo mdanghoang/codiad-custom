@@ -41,34 +41,51 @@ class CTCShell extends Shell {
             unlink($diff_file_name);
         }
         
-        // Get modified files
-        $this->cmd = "cd " . WORKSPACE . "/" . $this->project . " ; git ls-files --modified --exclude-standard";
-        $this->execCmdWithOutput($output);
-        if ($output != false) {
-            foreach ($output as $line) {
-                $modified_files[] = array("name"=>basename($line),"path"=>$line,"status"=>GIT_STATUS_MODIFIED);
+        $status_arr = array(GIT_STATUS_DELETED,GIT_STATUS_MODIFIED,GIT_STATUS_UNTRACKED);
+        foreach ($status_arr as $stt) {
+            // Get files with corresponding status in order: deleted, modified and other
+            $output = false;
+            $this->cmd = "cd " . WORKSPACE . "/" . $this->project . " ; git ls-files --" . $stt . " --exclude-standard";
+            $this->execCmdWithOutput($output);
+            if ($output != false) {
+                foreach ($output as $line) {
+                    // Check if this file path has been existed in file list
+                    if (!isInArray("path", $line, $modified_files)) {
+                        $modified_files[] = array("name"=>basename($line),"path"=>$line,"status"=>$stt);
+                    }
+                    
+                }
             }
         }
         
-        // Get untracked files
-        $output = false;
-        $this->cmd = "cd " . WORKSPACE . "/" . $this->project . " ; git ls-files --other --exclude-standard";
-        $this->execCmdWithOutput($output);
-        if ($output != false) {
-            foreach ($output as $line) {
-                $modified_files[] = array("name"=>basename($line),"path"=>$line,"status"=>GIT_STATUS_UNTRACKED);
-            }
-        }
-        
-        // Get deleted files
-        $output = false;
-        $this->cmd = "cd " . WORKSPACE . "/" . $this->project . " ; git ls-files --deleted --exclude-standard";
-        $this->execCmdWithOutput($output);
-        if ($output != false) {
-            foreach ($output as $line) {
-                $modified_files[] = array("name"=>basename($line),"path"=>$line,"status"=>GIT_STATUS_DELETED);
-            }
-        }
+//        // Get deleted files
+//        $this->cmd = "cd " . WORKSPACE . "/" . $this->project . " ; git ls-files --deleted --exclude-standard";
+//        $this->execCmdWithOutput($output);
+//        if ($output != false) {
+//            foreach ($output as $line) {
+//                $modified_files[] = array("name"=>basename($line),"path"=>$line,"status"=>GIT_STATUS_DELETED);
+//            }
+//        }
+//        
+//        // Get modified files
+//        $output = false;
+//        $this->cmd = "cd " . WORKSPACE . "/" . $this->project . " ; git ls-files --modified --exclude-standard";
+//        $this->execCmdWithOutput($output);
+//        if ($output != false) {
+//            foreach ($output as $line) {
+//                $modified_files[] = array("name"=>basename($line),"path"=>$line,"status"=>GIT_STATUS_MODIFIED);
+//            }
+//        }
+//        
+//        // Get untracked files
+//        $output = false;
+//        $this->cmd = "cd " . WORKSPACE . "/" . $this->project . " ; git ls-files --other --exclude-standard";
+//        $this->execCmdWithOutput($output);
+//        if ($output != false) {
+//            foreach ($output as $line) {
+//                $modified_files[] = array("name"=>basename($line),"path"=>$line,"status"=>GIT_STATUS_UNTRACKED);
+//            }
+//        }
         
         if ($modified_files != false) {
             saveJSON(basename($diff_file_name), $modified_files);

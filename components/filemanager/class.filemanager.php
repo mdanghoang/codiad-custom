@@ -96,10 +96,10 @@ class Filemanager {
                 $folders = array();
                 $files = array();
                 foreach($index as $item=>$data){
-                    if($data['type']=='directory'){
+                    if(($data['type']=='directory') && !isGitFolder($data['name'])) {
                         $folders[] = array("name"=>$data['name'],"type"=>$data['type'],"size"=>$data['type']);
                     }
-                    if($data['type']=='file'){
+                    if($data['type']=='file') {
                         $files[] = array("name"=>$data['name'],"type"=>$data['type'],"size"=>$data['type']);
                     }
                 }
