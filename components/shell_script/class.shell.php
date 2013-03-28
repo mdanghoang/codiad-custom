@@ -65,7 +65,7 @@ class Shell {
         }
         
         if (!is_null($output) && !empty($output)) {
-            logCTC(\implode(PHP_EOL,$output));
+            logCTC("Output of command: " . \implode(PHP_EOL,$output));
         }
     }
 

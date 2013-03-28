@@ -183,11 +183,15 @@
         return $ret;
     }
 
+    //////////////////////////////////////////////////////////////////
+    // Log message with following format
+    //   [Y-m-d H:i:s {session id} {client ip}] ===> message content
+    //////////////////////////////////////////////////////////////////
     function logCTC($message) {
         $path = DATA . "/";
         $file = "ctc.log";
         $write = fopen($path . $file, 'a') or die("can't open file");
-        $preline = "[" . date("Y-m-d H:i:s") . "] ===> ";
+        $preline = "[" . date("Y-m-d H:i:s") . " " . session_id() . " " . $_SERVER['REMOTE_ADDR'] . "] ===> ";
         fwrite($write, $preline . $message . PHP_EOL);
         fclose($write);
     }

@@ -22,6 +22,7 @@
     //////////////////////////////////////////////////////////////////
 
     if($_GET['action']=='authenticate'){
+        logCTC("AUTHENTICATING " . $_POST['username']);
         $User->username = $_POST['username'];
         $User->password = $_POST['password'];
         $User->lang = $_POST['language'];
@@ -33,6 +34,7 @@
     //////////////////////////////////////////////////////////////////
 
     if($_GET['action']=='logout'){
+        logCTC($_SESSION['user'] . " LOGOUT");
         session_unset(); session_destroy(); session_start();
     }
 

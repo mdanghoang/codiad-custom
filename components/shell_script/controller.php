@@ -31,14 +31,14 @@
     //////////////////////////////////////////////////////////////////
 
     if($_GET['action']=='deploy_app') {
-        logCTC("Action DEPLOY App ============ Start");
+        logCTC("DEPLOY App ============ Start");
         $out = $Shell->deployApplication();
         if ($out != false) {
             echo formatJSEND("success","Deployed successfully");
         } else {
             echo formatJSEND("error","Deploy application failed");
         }
-        logCTC("Action DEPLOY App ============ End");
+        logCTC("DEPLOY App ============ End");
     }
 
     //////////////////////////////////////////////////////////////////
@@ -46,14 +46,14 @@
     //////////////////////////////////////////////////////////////////
 
     if($_GET['action']=='analyze_code') {
-        logCTC("Action ANALYZE Code ============ Start");
+        logCTC("ANALYZE Code ============ Start");
         $out = $Shell->analyzeCode();
         if ($out != false) {
             echo formatJSEND("success","Analyzed code successfully");
         } else {
             echo formatJSEND("error","Analyze code failed");
         }
-        logCTC("Action ANALYZE Code ============ End");
+        logCTC("ANALYZE Code ============ End");
     }
 
     //////////////////////////////////////////////////////////////////
@@ -61,10 +61,10 @@
     //////////////////////////////////////////////////////////////////
 
     if($_GET['action']=='finish_exam') {
-        logCTC("Action FINISH Exam ============ Start");
+        logCTC("FINISH Exam ============ Start");
         $Shell->cmd = "D:\\Projects\\Training\\Codiad\\codiad\\components\\shell_script\\script\\testmail.bat";
         $Shell->execCmd();
-        logCTC("Action FINISH Exam ============ End");
+        logCTC("FINISH Exam ============ End");
     }
 
     //////////////////////////////////////////////////////////////////
@@ -72,9 +72,9 @@
     //////////////////////////////////////////////////////////////////
 
     if($_GET['action']=='check_commit') {
-        logCTC("Action CHECK files to commit ============ Start");
+        logCTC("CHECK files to commit ============ Start");
         $Shell->checkModifiedFiles();
-        logCTC("Action CHECK files to commit ============ End");
+        logCTC("CHECK files to commit ============ End");
     }
 
     //////////////////////////////////////////////////////////////////
@@ -82,13 +82,13 @@
     //////////////////////////////////////////////////////////////////
 
     if($_GET['action']=='commit') {
-        logCTC("Action COMMIT ============ Start");
+        logCTC("COMMIT ============ Start");
         $out = $Shell->commit($_GET['list'], $_GET['message']);
         if ($out != false) {
             echo formatJSEND("success","Commited successfully");
         } else {
             echo formatJSEND("error","Commit failed");
         }
-        logCTC("Action COMMIT ============ End");
+        logCTC("COMMIT ============ End");
     }
 ?>
