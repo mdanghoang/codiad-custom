@@ -18,7 +18,6 @@ python /home/Workspace/codiad/src/deploy.py $user $name
 PID=`echo $?`
 if [ $PID != 0  ]
 then
-if
 	echo "........FAILED .........."
 else
 	echo "........DONE .........."
