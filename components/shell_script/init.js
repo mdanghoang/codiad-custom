@@ -43,6 +43,10 @@
 
         finishExam: function() {
             alert('This function is not available in this version.');
+            $.msgBox({
+                title:"Selam / Hello",
+                content:"Merhaba Dünya! / Hello World!"
+            });
             // Run controller to finish exam
             //$.get(this.controller + '?action=finish_exam', function(data) {
             //    var testResponse = codiad.jsend.parse(data);

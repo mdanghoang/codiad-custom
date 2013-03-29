@@ -191,7 +191,7 @@
         $path = DATA . "/";
         $file = "ctc.log";
         $write = fopen($path . $file, 'a') or die("can't open file");
-        $preline = "[" . date("Y-m-d H:i:s") . " " . session_id() . " " . $_SERVER['REMOTE_ADDR'] . "] ===> ";
+        $preline = "[" . \date("Y-m-d H:i:s") . " " . \session_id() . " " . $_SERVER['REMOTE_ADDR'] . "] ===> ";
         fwrite($write, $preline . $message . PHP_EOL);
         fclose($write);
     }

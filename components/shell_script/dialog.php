@@ -72,14 +72,28 @@
                         //     - has at least one file to commit
                         //     - warning if there is no comment
                         if (selectedFiles.length <= 0) {
-                            alert("Please select at least one 1 file to finish your commit.");
+                            $.msgBox({
+                                title:"No file selected",
+                                content:"Please select at least one 1 file to finish your commit"
+                            });
                             return false;
                         } else {
                             // Good: at least one file selected
                             $('#txt_selected_files').val(JSON.stringify(selectedFiles));
                             if ($.trim($('textarea[name=commit_message]').val()) === "") {
                                 // No commit message: confirm ?
-                                alert('You have no message for this commit.');
+                                $.msgBox({
+                                    title: "No commit message",
+                                    content: "Will you continue to commit without message ?",
+                                    type: "confirm",
+                                    buttons: [{ value: "Yes" }, { value: "No" }],
+                                    success: function (result) {
+                                        if (result === "Yes") {
+                                            $('form').submit();
+                                        }
+                                    }
+                                });
+                                return false;
                             }
                         }
                     });
