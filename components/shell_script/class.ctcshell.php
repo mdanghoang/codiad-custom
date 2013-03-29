@@ -134,7 +134,7 @@ class CTCShell extends Shell {
         
         // Push files to remote repository
         $output = false;
-        $this->cmd = $this->cmd . " ; git push";
+        $this->cmd = $this->cmd . " ; git push 2>&1";
         $this->execCmdWithOutput($output);
         
         return $output;

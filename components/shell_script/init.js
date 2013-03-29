@@ -14,7 +14,11 @@
         //////////////////////////////////////////////////////////////////
 
         analyzeCode: function() {
-            alert('This function is not available in this version.');
+            $.msgBox({
+                title:"Information",
+                content:"This function is not available in this version",
+                type:"info"
+            });
             // Run controller to analyze source code of client
             //$.get(this.controller + '?action=analyze_code', function(data) {
             //});
@@ -42,10 +46,10 @@
         //////////////////////////////////////////////////////////////////
 
         finishExam: function() {
-            alert('This function is not available in this version.');
             $.msgBox({
-                title:"Selam / Hello",
-                content:"Merhaba Dünya! / Hello World!"
+                title:"Information",
+                content:"This function is not available in this version",
+                type:"info"
             });
             // Run controller to finish exam
             //$.get(this.controller + '?action=finish_exam', function(data) {
