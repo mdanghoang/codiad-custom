@@ -29,7 +29,11 @@
         //////////////////////////////////////////////////////////////////
 
         deployApp: function() {
-            alert('Deploy application in progress. You will receivce deployment result by mail.');
+            $.msgBox({
+                title:"Information",
+                content:"Deployment is in progress. You will receivce deployment result by mail",
+                type:"info"
+            });
             // Run controller to deploy application
             $.get(this.controller + '?action=deploy_app', function(data) {
                 var deployReponse = codiad.jsend.parse(data);
@@ -98,7 +102,12 @@
                 var testResponse = codiad.jsend.parse(data);
                 testResponse = testResponse.join('\n');
                 if (testResponse !== 'error') {
-                    alert(testResponse.toString());
+                    $.msgBox({
+                        title:"Information",
+                        content:testResponse.toString(),
+                        type:"info"
+                    });
+                    
                     codiad.message.success('Run command with success');
                 } else {
                     codiad.message.error('ERROR');
