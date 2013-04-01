@@ -28,7 +28,7 @@
                 } else {
                     $.msgBox({
                         title:"Too many requests in progress",
-                        content:"Too many requests of analyzing code is in processing. Please retry some few minutes later.",
+                        content:"Too many requests of analyzing code is in processing. Please retry in few minutes later.",
                         type:"error"
                     });
                     codiad.message.error(analyzeReponse);
