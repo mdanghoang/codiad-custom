@@ -21,14 +21,14 @@
                 if (analyzeReponse !== 'error') {
                     $.msgBox({
                         title:"Information",
-                        content:"Your request to analyze code is in processing. You will receive the analysis result by mail",
+                        content:"Your request to analyze code is in processing. You will receive the analysis result by mail.",
                         type:"info"
                     });
                     codiad.message.success(analyzeReponse);
                 } else {
                     $.msgBox({
                         title:"Too many requests in progress",
-                        content:"Too many requests of analyzing code is in processing. Please retry some few minutes later",
+                        content:"Too many requests of analyzing code is in processing. Please retry some few minutes later.",
                         type:"error"
                     });
                     codiad.message.error(analyzeReponse);
@@ -43,7 +43,7 @@
         deployApp: function() {
             $.msgBox({
                 title:"Information",
-                content:"Your request to deploy application is in processing. You will receivce deployment result by mail",
+                content:"Your request to deploy application is in processing. You will receivce deployment result by mail.",
                 type:"info"
             });
             // Run controller to deploy application
