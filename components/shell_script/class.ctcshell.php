@@ -157,7 +157,47 @@ class CTCShell extends Shell {
     //////////////////////////////////////////////////////////////////
 
     public function analyzeCode() {
-        return true;
+        $output = false;
+        // TODO Should check if there is an existing analysis for this user and this project
+        if ($this->addAnalysisQueue()) {
+            // Call script to launch analysis
+            $this->cmd = "sh " . SCRIPT_PATH . "/analyze_code_php.sh";
+            $this->execCmdWithOutput($output);
+        }
+        
+        return $output;
+    }
+    
+    //////////////////////////////////////////////////////////////////
+    // Add data to analysis queue file
+    // Return: 
+    //     true = success to add project to queue or project has been in queue
+    //     false = failed to save project to queue
+    //////////////////////////////////////////////////////////////////
+
+    private function addAnalysisQueue() {
+        $queue_file_name = DATA . "/acphp_queue.php";
+        $analyzing_process = false;
+        if (file_exists($queue_file_name)) {
+            $analyzing_process = getJSON(basename($queue_file_name));
+        }
+        
+        $existed = false;
+        // Check if there is an existing analysis for this user and this project
+        foreach ($analyzing_process as $process => $data) {
+            if ($data["user"] == $this->user && $data["project"] == $this->project) {
+                $existed = true;
+                break;
+            }
+        }
+        
+        if (!$existed) {
+            $analyzing_process[] = array("user"=> $this->user,"project"=> $this->project);
+        }
+        
+        $saved = saveJSONWithLock(basename($queue_file_name), $analyzing_process);
+        
+        return ($saved || $existed);
     }
         
 }

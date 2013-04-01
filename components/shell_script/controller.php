@@ -49,9 +49,9 @@
         logCTC("ANALYZE Code ============ Start");
         $out = $Shell->analyzeCode();
         if ($out != false) {
-            echo formatJSEND("success","Analyzed code successfully");
+            echo formatJSEND("success","Processed successfully - Analysis is waiting in queue");
         } else {
-            echo formatJSEND("error","Analyze code failed");
+            echo formatJSEND("error","Process to analyze code failed");
         }
         logCTC("ANALYZE Code ============ End");
     }

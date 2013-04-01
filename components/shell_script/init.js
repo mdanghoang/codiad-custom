@@ -9,19 +9,31 @@
     codiad.shellScript = {
         controller: 'components/shell_script/controller.php',
         dialog: 'components/shell_script/dialog.php',
+        
         //////////////////////////////////////////////////////////////////
         // Analyze source code
         //////////////////////////////////////////////////////////////////
 
         analyzeCode: function() {
-            $.msgBox({
-                title:"Information",
-                content:"This function is not available in this version",
-                type:"info"
-            });
             // Run controller to analyze source code of client
-            //$.get(this.controller + '?action=analyze_code', function(data) {
-            //});
+            $.get(this.controller + '?action=analyze_code', function(data) {
+                var analyzeReponse = codiad.jsend.parse(data);
+                if (analyzeReponse !== 'error') {
+                    $.msgBox({
+                        title:"Information",
+                        content:"Your request to analyze code is in processing. You will receive the analysis result by mail",
+                        type:"info"
+                    });
+                    codiad.message.success(analyzeReponse);
+                } else {
+                    $.msgBox({
+                        title:"Too many requests in progress",
+                        content:"Too many requests of analyzing code is in processing. Please retry some few minutes later",
+                        type:"error"
+                    });
+                    codiad.message.error(analyzeReponse);
+                }
+            });
 
         },
         //////////////////////////////////////////////////////////////////
@@ -31,7 +43,7 @@
         deployApp: function() {
             $.msgBox({
                 title:"Information",
-                content:"Deployment is in progress. You will receivce deployment result by mail",
+                content:"Your request to deploy application is in processing. You will receivce deployment result by mail",
                 type:"info"
             });
             // Run controller to deploy application
