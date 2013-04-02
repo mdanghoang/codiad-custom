@@ -53,8 +53,13 @@ class User {
             }
         }
 
-        if($pass){ echo formatJSEND("success",array("username"=>$this->username)); }
-        else{ echo formatJSEND("error","Incorrect Username or Password"); }
+        if ($pass){
+            echo formatJSEND("success",array("username"=>$this->username));
+            logCTC($this->username . " Authenticated");
+        } else {
+            echo formatJSEND("error","Incorrect Username or Password");
+            logCTC($this->username . " Authenticated failed");
+        }
     }
 
     //////////////////////////////////////////////////////////////////

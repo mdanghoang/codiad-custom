@@ -38,11 +38,44 @@ class Shell {
     }
 
     //////////////////////////////////////////////////////////////////
+    // Execute command with output
+    //////////////////////////////////////////////////////////////////
+
+    public function execCmdWithOutput(&$output) {
+        logCTC("Running command: " . $this->cmd);
+        //exec
+        if(function_exists('exec')){
+            exec($this->cmd, $output);
+        }
+        // system
+        else if(function_exists('system')){
+            ob_start();
+            system($this->cmd);
+            ob_end_clean();
+        }
+        //passthru
+        else if(function_exists('passthru')){
+            ob_start();
+            passthru($this->cmd);
+            ob_end_clean();
+        }
+        //shell_exec
+        else if(function_exists('shell_exec')){
+            shell_exec($this->cmd);
+        }
+        
+        if (!is_null($output) && !empty($output)) {
+            logCTC("Output of command: " . \implode(PHP_EOL,$output));
+        }
+    }
+
+    //////////////////////////////////////////////////////////////////
     // Execute command
     //////////////////////////////////////////////////////////////////
 
-    public function ExecCmd() {
-        exec($this->cmd,$output);
-        echo formatJSEND("success",$output);
+    public function execCmd() {
+        $output = false;
+        $this->execCmdWithOutput($output);
+        return $output;
     }
 }

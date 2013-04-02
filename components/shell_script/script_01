@@ -1,7 +1,0 @@
-cd workspace # cd to workspace of codiad
-git clone https://github.com/thanhbinh87/test02.git <name_project> # Clone project from github
-cd <name_project> # cd to project
-touch README
-git add README
-git commit -m "Test commit" # Commit
-git push # Push

@@ -11,9 +11,9 @@
     */
 
     require_once('../../config.php');
-    require_once('class.shell.php');
+    require_once('class.ctcshell.php');
 	
-	$Shell = new Shell();
+    $Shell = new CTCShell($_SESSION['user'],$_SESSION['project']);
 
     //////////////////////////////////////////////////////////////////
     // Test call command line from GUI in Codiad
@@ -21,15 +21,39 @@
 
     if($_GET['action']=='test_command') {
         $Shell->cmd = "dir D:\\";
-        $Shell->ExecCmd();
+        $Shell->execCmd();
     }
 
     //////////////////////////////////////////////////////////////////
-    // Test show user and project
+    // Deploy application
+    // At this moment, function is used only for deploying php application
+    // TODO deploy java application
     //////////////////////////////////////////////////////////////////
 
     if($_GET['action']=='deploy_app') {
-        echo formatJSEND("success",$_SESSION['user'].' - '.$_SESSION['project']);
+        logCTC("DEPLOY App ============ Start");
+        $out = $Shell->deployApplication();
+        if ($out != false) {
+            echo formatJSEND("success","Deployed successfully");
+        } else {
+            echo formatJSEND("error","Deploy application failed");
+        }
+        logCTC("DEPLOY App ============ End");
+    }
+
+    //////////////////////////////////////////////////////////////////
+    // Analyze code
+    //////////////////////////////////////////////////////////////////
+
+    if($_GET['action']=='analyze_code') {
+        logCTC("ANALYZE Code ============ Start");
+        $out = $Shell->analyzeCode();
+        if ($out != false) {
+            echo formatJSEND("success","Processed successfully - Analysis is waiting in queue");
+        } else {
+            echo formatJSEND("error","Process to analyze code failed");
+        }
+        logCTC("ANALYZE Code ============ End");
     }
 
     //////////////////////////////////////////////////////////////////
@@ -37,9 +61,34 @@
     //////////////////////////////////////////////////////////////////
 
     if($_GET['action']=='finish_exam') {
+        logCTC("FINISH Exam ============ Start");
         $Shell->cmd = "D:\\Projects\\Training\\Codiad\\codiad\\components\\shell_script\\script\\testmail.bat";
-        $Shell->ExecCmd();
+        $Shell->execCmd();
+        logCTC("FINISH Exam ============ End");
     }
 
+    //////////////////////////////////////////////////////////////////
+    // Check if there are files to commit
+    //////////////////////////////////////////////////////////////////
 
+    if($_GET['action']=='check_commit') {
+        logCTC("CHECK files to commit ============ Start");
+        $Shell->checkModifiedFiles();
+        logCTC("CHECK files to commit ============ End");
+    }
+
+    //////////////////////////////////////////////////////////////////
+    // Commit a file or some files
+    //////////////////////////////////////////////////////////////////
+
+    if($_GET['action']=='commit') {
+        logCTC("COMMIT ============ Start");
+        $out = $Shell->commit($_GET['list'], $_GET['message']);
+        if ($out != false) {
+            echo formatJSEND("success","Commited successfully");
+        } else {
+            echo formatJSEND("error","Commit failed");
+        }
+        logCTC("COMMIT ============ End");
+    }
 ?>

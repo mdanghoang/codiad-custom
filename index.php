@@ -20,6 +20,7 @@ $components = json_decode($components,true);
 <head>
     <meta charset="utf-8">
     <title>CODIAD</title>
+    <link rel="stylesheet" href="css/msgBoxLight.css">
     <link rel="stylesheet" href="css/jquery.toastmessage.css">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/fonts.css">
@@ -58,6 +59,7 @@ $components = json_decode($components,true);
     <script src="js/modal.js"></script>
     <script src="js/message.js"></script>
     <script src="js/jsend.js"></script>
+    <script src="js/jquery.msgBox.js"></script>
     <div id="message"></div>
     <?php
 

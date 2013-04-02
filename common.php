@@ -90,6 +90,44 @@
     }
 
     //////////////////////////////////////////////////////////////////
+    // Save JSON with lock file
+    // If file is locked, wait for max 1 second
+    //////////////////////////////////////////////////////////////////
+    
+    define("MAX_OPEN_FILE_RETRY_NUMBER", 10);
+    // period (value in second) between each open file retry
+    define("PERIOD_BETWEEN_OPEN_FILE", 1);
+
+    function saveJSONWithLock($file,$data,$namespace=""){
+        $path = BASE_PATH . "/data/";
+        if($namespace != ""){
+            $path = $path . $namespace . "/";
+            $path = preg_replace('#/+#','/',$path);
+            if(!is_dir($path)) mkdir($path);
+        }
+        
+        $save_success = false;
+        $retry_number = 0;
+        $write = fopen($path . $file, 'w');
+        while (!$save_success && $retry_number < MAX_OPEN_FILE_RETRY_NUMBER) {
+            if (flock($write, LOCK_EX)) {
+                // lock file with success => write data
+                $data = "<?php/*|" . json_encode($data) . "|*/?>";
+                fwrite($write, $data);
+                flock($write, LOCK_UN);
+                $save_success = true;
+            } else {
+                // lock file failed => another is writing file => wait 1s and retry
+                sleep(PERIOD_BETWEEN_OPEN_FILE);
+            }
+            $retry_number ++;
+        }
+        fclose($write);
+        
+        return $save_success;
+    }
+
+    //////////////////////////////////////////////////////////////////
     // Format JSEND Response
     //////////////////////////////////////////////////////////////////
 
@@ -134,6 +172,66 @@
             return !in_array($func, $disabled);
         }
         return true;
+    }
+
+    define("GIT_STATUS_MODIFIED","modified");
+    define("GIT_STATUS_UNTRACKED","other");
+    define("GIT_STATUS_DELETED","deleted");
+
+    function gitStatus($status) {
+        $ret = "Unknown";
+        switch ($status) {
+            case GIT_STATUS_MODIFIED:
+                $ret = "Modified";
+                break;
+
+            case GIT_STATUS_UNTRACKED:
+                $ret = "Untracked";
+                break;
+
+            case GIT_STATUS_DELETED:
+                $ret = "Deleted";
+                break;
+
+            default:
+                break;
+        }
+        return $ret;
+    }
+    
+    define("GIT_FOLDER",".git");
+    function isGitFolder($path) {
+        return (basename($path) == GIT_FOLDER);
+    }
+    
+    //////////////////////////////////////////////////////////////////
+    // Check if a key/value exist in a 2 dimensions array
+    // Return: 
+    //     false if not exist
+    //     true if exist
+    //////////////////////////////////////////////////////////////////
+    function isInArray($key,$val,$array) {
+        $ret = false;
+        foreach ($array as $item) {
+            if (isset($item[$key]) && $item[$key] == $val) {
+                $ret = true;
+                break;
+            }
+        }
+        return $ret;
+    }
+
+    //////////////////////////////////////////////////////////////////
+    // Log message with following format
+    //   [Y-m-d H:i:s {session id} {client ip}] ===> message content
+    //////////////////////////////////////////////////////////////////
+    function logCTC($message) {
+        $path = DATA . "/";
+        $file = "ctc.log";
+        $write = fopen($path . $file, 'a') or die("can't open file");
+        $preline = "[" . \date("Y-m-d H:i:s") . " " . \session_id() . " " . $_SERVER['REMOTE_ADDR'] . "] ===> ";
+        fwrite($write, $preline . $message . PHP_EOL);
+        fclose($write);
     }
 
 ?>
