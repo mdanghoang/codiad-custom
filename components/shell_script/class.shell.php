@@ -85,7 +85,7 @@ class Shell {
 
     public function execCmdInBackground() {
         $output = false;
-        $this->cmd = $this->cmd . " &";
+        $this->cmd = $this->cmd . "> ". DATA . "/ctc_console.log 2>&1 &";
         $this->execCmdWithOutput($output);
     }
 }
