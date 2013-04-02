@@ -58,35 +58,6 @@ class CTCShell extends Shell {
             }
         }
         
-//        // Get deleted files
-//        $this->cmd = "cd " . WORKSPACE . "/" . $this->project . " ; git ls-files --deleted --exclude-standard";
-//        $this->execCmdWithOutput($output);
-//        if ($output != false) {
-//            foreach ($output as $line) {
-//                $modified_files[] = array("name"=>basename($line),"path"=>$line,"status"=>GIT_STATUS_DELETED);
-//            }
-//        }
-//        
-//        // Get modified files
-//        $output = false;
-//        $this->cmd = "cd " . WORKSPACE . "/" . $this->project . " ; git ls-files --modified --exclude-standard";
-//        $this->execCmdWithOutput($output);
-//        if ($output != false) {
-//            foreach ($output as $line) {
-//                $modified_files[] = array("name"=>basename($line),"path"=>$line,"status"=>GIT_STATUS_MODIFIED);
-//            }
-//        }
-//        
-//        // Get untracked files
-//        $output = false;
-//        $this->cmd = "cd " . WORKSPACE . "/" . $this->project . " ; git ls-files --other --exclude-standard";
-//        $this->execCmdWithOutput($output);
-//        if ($output != false) {
-//            foreach ($output as $line) {
-//                $modified_files[] = array("name"=>basename($line),"path"=>$line,"status"=>GIT_STATUS_UNTRACKED);
-//            }
-//        }
-        
         if ($modified_files != false) {
             saveJSON(basename($diff_file_name), $modified_files);
         }
@@ -162,7 +133,7 @@ class CTCShell extends Shell {
         if ($this->addAnalysisQueue()) {
             // Call script to launch analysis
             $this->cmd = "sh " . SCRIPT_PATH . "/analyze_code_php.sh";
-            $this->execCmdWithOutput($output);
+            $this->execCmdInBackground();
             $output = true;
         }
         

@@ -78,4 +78,14 @@ class Shell {
         $this->execCmdWithOutput($output);
         return $output;
     }
+    
+    //////////////////////////////////////////////////////////////////
+    // Execute command in background and don't care output
+    //////////////////////////////////////////////////////////////////
+
+    public function execCmdInBackground() {
+        $output = false;
+        $this->cmd = $this->cmd . " &";
+        $this->execCmdWithOutput($output);
+    }
 }
