@@ -19,7 +19,7 @@ $components = json_decode($components,true);
 
 <head>
     <meta charset="utf-8">
-    <title>CODIAD</title>
+    <title>CODING TESTING CENTER</title>
     <link rel="stylesheet" href="css/msgBoxLight.css">
     <link rel="stylesheet" href="css/jquery.toastmessage.css">
     <link rel="stylesheet" href="css/reset.css">
