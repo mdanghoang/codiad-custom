@@ -158,11 +158,12 @@ class CTCShell extends Shell {
 
     public function analyzeCode() {
         $output = false;
-        // TODO Should check if there is an existing analysis for this user and this project
+        // Add analysis to process queue
         if ($this->addAnalysisQueue()) {
             // Call script to launch analysis
             $this->cmd = "sh " . SCRIPT_PATH . "/analyze_code_php.sh";
             $this->execCmdWithOutput($output);
+            $output = true;
         }
         
         return $output;
@@ -180,11 +181,12 @@ class CTCShell extends Shell {
         $analyzing_process = false;
         if (file_exists($queue_file_name)) {
             $analyzing_process = getJSON(basename($queue_file_name));
+            logCTC("Got process queue from file");
         }
         
         $existed = false;
         // Check if there is an existing analysis for this user and this project
-        foreach ($analyzing_process as $process => $data) {
+        foreach ($analyzing_process as $data) {
             if ($data["user"] == $this->user && $data["project"] == $this->project) {
                 $existed = true;
                 break;
@@ -193,9 +195,12 @@ class CTCShell extends Shell {
         
         if (!$existed) {
             $analyzing_process[] = array("user"=> $this->user,"project"=> $this->project);
+            logCTC("User: " . $this->user . " - project: " . $this->project ." added to queue");
         }
         
         $saved = saveJSONWithLock(basename($queue_file_name), $analyzing_process);
+        if (!$saved)
+            logCTC ("Cannot save data to file");
         
         return ($saved || $existed);
     }
