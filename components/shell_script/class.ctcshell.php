@@ -158,11 +158,12 @@ class CTCShell extends Shell {
 
     public function analyzeCode() {
         $output = false;
-        // TODO Should check if there is an existing analysis for this user and this project
+        // Add analysis to process queue
         if ($this->addAnalysisQueue()) {
             // Call script to launch analysis
             $this->cmd = "sh " . SCRIPT_PATH . "/analyze_code_php.sh";
             $this->execCmdWithOutput($output);
+            $output = true;
         }
         
         return $output;
