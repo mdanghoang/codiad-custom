@@ -24,7 +24,7 @@
                         content:i18n("Your request to analyze code is in processing. You will receive the analysis result by mail."),
                         type:"info"
                     });
-                    codiad.message.success(analyzeReponse);
+                    codiad.message.success(i18n(analyzeReponse));
                 } else {
                     $.msgBox({
                         title:i18n("Too many requests in progress"),
@@ -49,7 +49,7 @@
             $.get(this.controller + '?action=deploy_app', function(data) {
                 var deployReponse = codiad.jsend.parse(data);
                 if (deployReponse !== 'error') {
-                    codiad.message.success(deployReponse);
+                    codiad.message.success(i18n(deployReponse));
                 }
             });
         },
@@ -92,9 +92,7 @@
                 $.get(_this.controller + '?action=commit&list=' + selectedFiles + '&message=' + commitMessage, function(data) {
                     var commitResponse = codiad.jsend.parse(data);
                     if (commitResponse !== 'error') {
-                        codiad.message.success(commitResponse);
-                    } else {
-                        codiad.message.error(commitResponse);
+                        codiad.message.success(i18n(commitResponse));
                     }
                 });
                 codiad.modal.unload();
