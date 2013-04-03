@@ -28,19 +28,20 @@
     var availableTextModes = new Array(
         'html',
         'javascript',
-        'coffee',
+        //'coffee',
         'css',
         'scss',
-        'less',
+        //'less',
         'php',
+        'java',
         'json',
         'xml',
         'sql',
-        'markdown',
-        'c_cpp',
-        'python',
-        'ruby',
-        'jade',
+        //'markdown',
+        //'c_cpp',
+        //'python',
+        //'ruby',
+        //'jade',
         'text'
     );
 
