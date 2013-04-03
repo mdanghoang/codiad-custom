@@ -31,7 +31,6 @@
                         content:i18n("Too many requests of analyzing code is in processing. Please retry in few minutes later."),
                         type:"error"
                     });
-                    codiad.message.error(analyzeReponse);
                 }
             });
 
@@ -51,8 +50,6 @@
                 var deployReponse = codiad.jsend.parse(data);
                 if (deployReponse !== 'error') {
                     codiad.message.success(deployReponse);
-                } else {
-                    codiad.message.error(deployReponse);
                 }
             });
         },

@@ -35,8 +35,10 @@
         $out = $Shell->deployApplication();
         if ($out != false) {
             echo formatJSEND("success",  i18n("Deployed successfully"));
+            logCTC(i18n("Deployed successfully"));
         } else {
             echo formatJSEND("error", i18n("Deploy application failed"));
+            logCTC(i18n("Deploy application failed"));
         }
         logCTC("DEPLOY App ============ End");
     }
@@ -50,8 +52,10 @@
         $out = $Shell->analyzeCode();
         if ($out != false) {
             echo formatJSEND("success",i18n("Processed successfully - Analysis is waiting in queue"));
+            logCTC(i18n("Processed successfully - Analysis is waiting in queue"));
         } else {
             echo formatJSEND("error",i18n("Process to analyze code failed"));
+            logCTC(i18n("Process to analyze code failed"));
         }
         logCTC("ANALYZE Code ============ End");
     }
