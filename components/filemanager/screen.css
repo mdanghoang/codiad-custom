@@ -250,6 +250,9 @@
 #file-manager .ext-jar {
     background-image: url(images/java.png);
 }
+#file-manager .ext-java {
+    background-image: url(images/java.png);
+}
 #file-manager .ext-jpg {
     background-image: url(images/picture.png);
 }
