@@ -714,6 +714,9 @@
                 return 'jade';
             case 'coffee':
                 return 'coffee';
+            case 'jar':
+            case 'java':
+                return 'java';
             default:
                 return 'text';
             }
