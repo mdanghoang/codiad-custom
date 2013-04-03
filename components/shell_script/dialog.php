@@ -74,7 +74,7 @@
                         if (selectedFiles.length <= 0) {
                             $.msgBox({
                                 title:i18n("No file selected"),
-                                content:i18n("Please select at least one 1 file to finish your commit")
+                                content:i18n("Please select at least one file to finish your commit")
                             });
                             return false;
                         } else {
@@ -100,11 +100,11 @@
                 });
             </script>
             <form>
-            <label><?php i18n("Commit message"); ?></label>
+            <label><?php i18n("Commit Message"); ?></label>
             <textarea name="commit_message" autofocus="autofocus" cols="80" rows="10"/>
 
             <input type="hidden" name="selected_files" id="txt_selected_files" value=""/>
-            <label><?php i18n("Files to commit"); ?></label>
+            <label><?php i18n("Files To Commit"); ?></label>
             <div id="div_files_to_commit">
             <table id="table_files_to_commit" width="100%">
                 <tr>
