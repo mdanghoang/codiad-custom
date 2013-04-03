@@ -35,8 +35,10 @@
         $out = $Shell->deployApplication();
         if ($out != false) {
             echo formatJSEND("success", "Deployed successfully");
+            logCTC("Deployed successfully");
         } else {
             echo formatJSEND("error", "Deploy application failed");
+            logCTC("Deployed FAILED");
         }
         logCTC("DEPLOY App ============ End");
     }
@@ -50,8 +52,10 @@
         $out = $Shell->analyzeCode();
         if ($out != false) {
             echo formatJSEND("success","Processed successfully - Analysis is waiting in queue");
+            logCTC("Saved to queue successfully");
         } else {
             echo formatJSEND("error","Process to analyze code failed");
+            logCTC("Saved to queue FAILED");
         }
         logCTC("ANALYZE Code ============ End");
     }
@@ -86,8 +90,10 @@
         $out = $Shell->commit($_GET['list'], $_GET['message']);
         if ($out != false) {
             echo formatJSEND("success","Commited successfully");
+            logCTC("Commited successfully");
         } else {
             echo formatJSEND("error","Commit failed");
+            logCTC("Commited FAILED");
         }
         logCTC("COMMIT ============ End");
     }
