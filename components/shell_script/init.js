@@ -42,7 +42,7 @@
         deployApp: function() {
             $.msgBox({
                 title:i18n("Information"),
-                content:i18n("Your request to deploy application is in processing. You will receivce deployment result by mail."),
+                content:i18n("Your request to deploy application is in processing. You will receive deployment result by mail."),
                 type:"info"
             });
             // Run controller to deploy application

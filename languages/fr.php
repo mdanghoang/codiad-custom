@@ -52,6 +52,32 @@ $lang = array(
    "Copied to Clipboard"                                 => "Copié vers le presse-papier",
    "Nothing in Your Clipboard"                           => "Presse-papiers vide",
    "Cannot Paste Directory Into Itself"                  => "Les dossiers source et destination sont identiques",
-   "File could not be saved"                             => "Le fichier n'a pas pu être enregistré"
+   "File could not be saved"                             => "Le fichier n'a pas pu être enregistré",
+    //CTC messages
+    "Commit Code"                                        => "Commettre au Git",
+    "Analyze Code"                                       => "Analyser le code",
+    "Deploy App"                                         => "Déployer l'app",
+    "Finish Exam"                                        => "Terminer l'exam",
+    "No file selected"                                   => "Pas de fichier selectionné",
+    "Please select at least one 1 file to finish your commit" => "Please select at least one 1 file to finish your commit",
+    "No commit message"                                  => "Pas de message",
+    "Will you continue to commit without message ?"      => "Allez-vous continuer à commettre sans commentaire?",
+    "Commit message"                                     => "Commentaire",
+    "Files to commit"                                    => "Fichiers à commettre",
+    "File"                                               => "Fichier",
+    "Status"                                             => "Etat",
+    "Path"                                               => "Chemin",
+    "Information"                                        => "Information",
+    "This function is not available in this version"     => "Cette fonction n'est pas disponible dans cette version",
+    "Your request to deploy application is in processing. You will receive deployment result by mail." => "Votre demande de déploiement est en traitement. Vous recevrez par email le résultat de déploiement.",
+    "Too many requests in progress"                      => "Trop de demandes en cours",
+    "Too many requests of analyzing code is in processing. Please retry in few minutes later." => "Trop de demandes d'analyse de code est en traitement. S'il vous plaît réessayer dans quelques minutes plus tard.",
+    "Your request to analyze code is in processing. You will receive the analysis result by mail." => "Votre demande d'analyse de code est en traitement. Vous recevrez par email le résultat de l'analyse.",
+    "Deployed successfully"                              => "Déployé avec succès",
+    "Deploy application failed"                          => "Le déploiement a échoué",
+    "Processed successfully - Analysis is waiting in queue" => "Traitée avec succès",
+    "Process to analyze code failed"                     => "Le traitement a échoué",
+    "Commited successfully"                              => "Commis avec succès",
+    "Commit failed"                                      => "Le commit a échoué"
 );
 ?>
