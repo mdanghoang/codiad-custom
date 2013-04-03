@@ -73,8 +73,8 @@
                         //     - warning if there is no comment
                         if (selectedFiles.length <= 0) {
                             $.msgBox({
-                                title:"No file selected",
-                                content:"Please select at least one 1 file to finish your commit"
+                                title:i18n("No file selected"),
+                                content:i18n("Please select at least one 1 file to finish your commit")
                             });
                             return false;
                         } else {
@@ -83,12 +83,12 @@
                             if ($.trim($('textarea[name=commit_message]').val()) === "") {
                                 // No commit message: confirm ?
                                 $.msgBox({
-                                    title: "No commit message",
-                                    content: "Will you continue to commit without message ?",
+                                    title: i18n("No commit message"),
+                                    content: i18n("Will you continue to commit without message ?"),
                                     type: "confirm",
-                                    buttons: [{ value: "Yes" }, { value: "No" }],
+                                    buttons: [{ value: i18n("Yes") }, { value: i18n("No") }],
                                     success: function (result) {
-                                        if (result === "Yes") {
+                                        if (result === i18n("Yes")) {
                                             $('form').submit();
                                         }
                                     }
@@ -100,18 +100,18 @@
                 });
             </script>
             <form>
-            <label>Commit message</label>
+            <label><?php i18n("Commit message"); ?></label>
             <textarea name="commit_message" autofocus="autofocus" cols="80" rows="10"/>
 
             <input type="hidden" name="selected_files" id="txt_selected_files" value=""/>
-            <label>Files to commit</label>
+            <label><?php i18n("Files to commit"); ?></label>
             <div id="div_files_to_commit">
             <table id="table_files_to_commit" width="100%">
                 <tr>
                     <th width="5"><input type="checkbox" id="chkbox_commit_all" name="chkbox" value="0"/></th>
-                    <th>File</th><!-- 2nd column -->
-                    <th>Status</th><!-- 3rd column -->
-                    <th>Path</th><!-- 4th column -->
+                    <th><?php i18n("File"); ?></th><!-- 2nd column -->
+                    <th><?php i18n("Status"); ?></th><!-- 3rd column -->
+                    <th><?php i18n("Path"); ?></th><!-- 4th column -->
                 </tr>
 
             <?php

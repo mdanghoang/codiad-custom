@@ -55,6 +55,28 @@ $lang = array(
    "Copied to Clipboard"                                 => "Copied to Clipboard",
    "Nothing in Your Clipboard"                           => "Nothing in Your Clipboard",
    "Cannot Paste Directory Into Itself"                  => "Cannot Paste Directory Into Itself",
-   "File could not be saved"                             => "File could not be saved"
+   "File could not be saved"                             => "File could not be saved",
+    //CTC messages
+    "No file selected"                                   => "No file selected",
+    "Please select at least one 1 file to finish your commit" => "Please select at least one 1 file to finish your commit",
+    "No commit message"                                  => "No commit message",
+    "Will you continue to commit without message ?"      => "Will you continue to commit without message ?",
+    "Commit message"                                     => "Commit message",
+    "Files to commit"                                    => "Files to commit",
+    "File"                                               => "File",
+    "Status"                                             => "Status",
+    "Path"                                               => "Path",
+    "Information"                                        => "Information",
+    "This function is not available in this version"     => "This function is not available in this version",
+    "Your request to deploy application is in processing. You will receivce deployment result by mail." => "Your request to deploy application is in processing. You will receivce deployment result by mail.",
+    "Too many requests in progress"                      => "Too many requests in progress",
+    "Too many requests of analyzing code is in processing. Please retry in few minutes later." => "Too many requests of analyzing code is in processing. Please retry in few minutes later.",
+    "Your request to analyze code is in processing. You will receive the analysis result by mail." => "Your request to analyze code is in processing. You will receive the analysis result by mail.",
+    "Deployed successfully"                              => "Deployed successfully",
+    "Deploy application failed"                          => "Deploy application failed",
+    "Processed successfully - Analysis is waiting in queue" => "Processed successfully - Analysis is waiting in queue",
+    "Process to analyze code failed"                     => "Process to analyze code failed",
+    "Commited successfully"                              => "Commited successfully",
+    "Commit failed"                                      => "Commit failed"
 );
 ?>

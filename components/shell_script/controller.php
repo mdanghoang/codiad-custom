@@ -34,9 +34,9 @@
         logCTC("DEPLOY App ============ Start");
         $out = $Shell->deployApplication();
         if ($out != false) {
-            echo formatJSEND("success","Deployed successfully");
+            echo formatJSEND("success",  i18n("Deployed successfully"));
         } else {
-            echo formatJSEND("error","Deploy application failed");
+            echo formatJSEND("error", i18n("Deploy application failed"));
         }
         logCTC("DEPLOY App ============ End");
     }
@@ -49,9 +49,9 @@
         logCTC("ANALYZE Code ============ Start");
         $out = $Shell->analyzeCode();
         if ($out != false) {
-            echo formatJSEND("success","Processed successfully - Analysis is waiting in queue");
+            echo formatJSEND("success",i18n("Processed successfully - Analysis is waiting in queue"));
         } else {
-            echo formatJSEND("error","Process to analyze code failed");
+            echo formatJSEND("error",i18n("Process to analyze code failed"));
         }
         logCTC("ANALYZE Code ============ End");
     }
@@ -85,9 +85,9 @@
         logCTC("COMMIT ============ Start");
         $out = $Shell->commit($_GET['list'], $_GET['message']);
         if ($out != false) {
-            echo formatJSEND("success","Commited successfully");
+            echo formatJSEND("success",i18n("Commited successfully"));
         } else {
-            echo formatJSEND("error","Commit failed");
+            echo formatJSEND("error",i18n("Commit failed"));
         }
         logCTC("COMMIT ============ End");
     }

@@ -20,15 +20,15 @@
                 var analyzeReponse = codiad.jsend.parse(data);
                 if (analyzeReponse !== 'error') {
                     $.msgBox({
-                        title:"Information",
-                        content:"Your request to analyze code is in processing. You will receive the analysis result by mail.",
+                        title:i18n("Information"),
+                        content:i18n("Your request to analyze code is in processing. You will receive the analysis result by mail."),
                         type:"info"
                     });
                     codiad.message.success(analyzeReponse);
                 } else {
                     $.msgBox({
-                        title:"Too many requests in progress",
-                        content:"Too many requests of analyzing code is in processing. Please retry in few minutes later.",
+                        title:i18n("Too many requests in progress"),
+                        content:i18n("Too many requests of analyzing code is in processing. Please retry in few minutes later."),
                         type:"error"
                     });
                     codiad.message.error(analyzeReponse);
@@ -42,8 +42,8 @@
 
         deployApp: function() {
             $.msgBox({
-                title:"Information",
-                content:"Your request to deploy application is in processing. You will receivce deployment result by mail.",
+                title:i18n("Information"),
+                content:i18n("Your request to deploy application is in processing. You will receivce deployment result by mail."),
                 type:"info"
             });
             // Run controller to deploy application
@@ -63,8 +63,8 @@
 
         finishExam: function() {
             $.msgBox({
-                title:"Information",
-                content:"This function is not available in this version",
+                title:i18n("Information"),
+                content:i18n("This function is not available in this version"),
                 type:"info"
             });
             // Run controller to finish exam
